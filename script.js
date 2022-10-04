@@ -1,15 +1,24 @@
 $("#currentDay").text(moment().format("dddd" + ", " + "MMMM Do"))
 $("#currentDay").css("color","red")
+
+
+
 for(var i=9;i<13;i++){
     
-    $("<div>").appendTo(".container").attr("id", i).text(i + "am" + ": " ).css("padding","30px").css("outline-style","solid")
+    
+    
+    $("<div>").appendTo(".container").attr("id", i).text(i + "am" + ": ").css("padding","30px").css("outline-style","solid")
     .css("display","flex").on("click",function(){
         var promptResponse =prompt("Describe event")
         $("<div>").appendTo($(this)).text(promptResponse).css("margin-left","20px")
-        localStorage.setItem("event"+i, promptResponse)})
-
         
-    var timeId= i.toString() 
+        
+        
+     } )
+     
+
+
+     var timeId= i.toString() 
     if($("#" + timeId).attr("id")<moment().hour()){
         $("#" + timeId).attr("class","past")
     }else if ($("#" + timeId).attr("id")==moment().hour()){
@@ -17,6 +26,18 @@ for(var i=9;i<13;i++){
     } else{
         $("#" + timeId).attr("class","future")
 }
+    $(".container").attr("id","time"+i)
+
+     $("<button>").appendTo(".container").attr("class","saveBtn").css("color","green").css("height","30px").css("width","40px").text("save").on("click",function(){
+        
+        localStorage.setItem("contents",$("#time"+i).text())
+     })
+
+    
+
+        
+   
+
 }
 for(var i=9;i<13;++i){
     if(localStorage.getItem("event"+i)!=null){
@@ -36,6 +57,11 @@ for(var i=1;i<6;i++){
     } else{
         $("#" + timeId).attr("class","future")
     }
+
+    $("<button>").appendTo(".container").attr("class","saveBtn").css("color","green").css("height","30px").css("width","40px").text("save").on("click",function(){
+        
+        localStorage.setItem("contents",$("#time"+i).text())
+     })
 
 
 }
